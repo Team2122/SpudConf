@@ -30,12 +30,54 @@ namespace Tator.SpudConf
         public void Load(Stream stream)
         {
             Clear();
+            Metadata.Clear();
+            Comments.Clear();
             ConfigLoader.Load(this, stream);
         }
 
         public void Generate(Stream stream)
         {
             ConfigLoader.Generate(this, stream);
+        }
+
+        public bool ContainsParentKey(string key)
+        {
+            var splitKey = key.Split('.');
+            foreach (var c in this)
+            {
+                var currentSplitKey = c.Key.Split('.');
+                if (currentSplitKey.Length < splitKey.Length)
+                    continue;
+                var contains = false;
+                for (var i = 0; i < splitKey.Length; i++)
+                {
+                    if (splitKey[i] != currentSplitKey[i])
+                    {
+                        contains = false;
+                        break;
+                    }
+                }
+                if (contains)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public void RenameKey(string oldKey, string newKey)
+        {
+            var toChange = from c in this.ToList()
+                           where c.Key.Length >= oldKey.Length
+                           where c.Key.Substring(0, oldKey.Length).Equals(oldKey)
+                           select c;
+            foreach (var change in toChange)
+            {
+                var transformedKey = newKey.Replace(oldKey, newKey);
+                this.Add(transformedKey, this[change.Key]);
+                this.Remove(change.Key);
+            }
+
         }
 
         public Dictionary<string, string> Metadata { get; set; }

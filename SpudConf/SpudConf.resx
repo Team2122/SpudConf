@@ -255,20 +255,32 @@
   <data name="menuStrip.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>None</value>
   </data>
+  <data name="toolStripItemOpenDirectory.Size" type="System.Drawing.Size, System.Drawing">
+    <value>188, 22</value>
+  </data>
+  <data name="toolStripItemOpenDirectory.Text" xml:space="preserve">
+    <value>&amp;Open Directory</value>
+  </data>
+  <data name="toolStripItemOpenTemp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>188, 22</value>
+  </data>
+  <data name="toolStripItemOpenTemp.Text" xml:space="preserve">
+    <value>Open &amp;Temp Directory</value>
+  </data>
   <data name="toolStripItemOpen.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>Ctrl+O</value>
   </data>
   <data name="toolStripItemOpen.Size" type="System.Drawing.Size, System.Drawing">
-    <value>186, 22</value>
+    <value>188, 22</value>
   </data>
   <data name="toolStripItemOpen.Text" xml:space="preserve">
-    <value>&amp;Open</value>
+    <value>Open &amp;File</value>
   </data>
   <data name="toolStripItemSave.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>Ctrl+S</value>
   </data>
   <data name="toolStripItemSave.Size" type="System.Drawing.Size, System.Drawing">
-    <value>186, 22</value>
+    <value>188, 22</value>
   </data>
   <data name="toolStripItemSave.Text" xml:space="preserve">
     <value>&amp;Save</value>
@@ -277,25 +289,19 @@
     <value>Ctrl+Shift+S</value>
   </data>
   <data name="toolStripItemSaveAs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>186, 22</value>
+    <value>188, 22</value>
   </data>
   <data name="toolStripItemSaveAs.Text" xml:space="preserve">
     <value>Save &amp;As</value>
   </data>
-  <data name="toolStripItemUpload.Size" type="System.Drawing.Size, System.Drawing">
-    <value>186, 22</value>
-  </data>
-  <data name="toolStripItemUpload.Text" xml:space="preserve">
-    <value>&amp;Upload</value>
-  </data>
   <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>183, 6</value>
+    <value>185, 6</value>
   </data>
   <data name="toolStripItemQuit.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>Ctrl+Q</value>
   </data>
   <data name="toolStripItemQuit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>186, 22</value>
+    <value>188, 22</value>
   </data>
   <data name="toolStripItemQuit.Text" xml:space="preserve">
     <value>&amp;Quit</value>
@@ -305,6 +311,30 @@
   </data>
   <data name="toolStripItemFile.Text" xml:space="preserve">
     <value>&amp;File</value>
+  </data>
+  <data name="toolStripItemDeploy.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="toolStripItemDeploy.Text" xml:space="preserve">
+    <value>&amp;Push</value>
+  </data>
+  <data name="toolStripItemPushAll.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="toolStripItemPushAll.Text" xml:space="preserve">
+    <value>Push &amp;All</value>
+  </data>
+  <data name="toolStripItemPullAll.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="toolStripItemPullAll.Text" xml:space="preserve">
+    <value>P&amp;ull All</value>
+  </data>
+  <data name="toolStripItemRobot.Size" type="System.Drawing.Size, System.Drawing">
+    <value>51, 20</value>
+  </data>
+  <data name="toolStripItemRobot.Text" xml:space="preserve">
+    <value>&amp;Robot</value>
   </data>
   <data name="toolStripItemName.Size" type="System.Drawing.Size, System.Drawing">
     <value>129, 22</value>
@@ -393,11 +423,20 @@
   <data name="toolStripButtonRemove.Text" xml:space="preserve">
     <value>Remove</value>
   </data>
+  <data name="toolStripLabel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>28, 22</value>
+  </data>
+  <data name="toolStripLabel1.Text" xml:space="preserve">
+    <value>File:</value>
+  </data>
+  <data name="toolStripComboFiles.Size" type="System.Drawing.Size, System.Drawing">
+    <value>200, 25</value>
+  </data>
   <data name="toolStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 24</value>
   </data>
   <data name="toolStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>58, 25</value>
+    <value>288, 25</value>
   </data>
   <data name="toolStrip1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -447,6 +486,9 @@
   <metadata name="saveFileDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>226, 17</value>
   </metadata>
+  <metadata name="folderBrowserDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>521, 17</value>
+  </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -474,6 +516,18 @@
   <data name="&gt;&gt;toolStripItemFile.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;toolStripItemOpenDirectory.Name" xml:space="preserve">
+    <value>toolStripItemOpenDirectory</value>
+  </data>
+  <data name="&gt;&gt;toolStripItemOpenDirectory.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripItemOpenTemp.Name" xml:space="preserve">
+    <value>toolStripItemOpenTemp</value>
+  </data>
+  <data name="&gt;&gt;toolStripItemOpenTemp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;toolStripItemOpen.Name" xml:space="preserve">
     <value>toolStripItemOpen</value>
   </data>
@@ -492,12 +546,6 @@
   <data name="&gt;&gt;toolStripItemSaveAs.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripItemUpload.Name" xml:space="preserve">
-    <value>toolStripItemUpload</value>
-  </data>
-  <data name="&gt;&gt;toolStripItemUpload.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;toolStripSeparator1.Name" xml:space="preserve">
     <value>toolStripSeparator1</value>
   </data>
@@ -508,6 +556,30 @@
     <value>toolStripItemQuit</value>
   </data>
   <data name="&gt;&gt;toolStripItemQuit.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripItemRobot.Name" xml:space="preserve">
+    <value>toolStripItemRobot</value>
+  </data>
+  <data name="&gt;&gt;toolStripItemRobot.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripItemDeploy.Name" xml:space="preserve">
+    <value>toolStripItemDeploy</value>
+  </data>
+  <data name="&gt;&gt;toolStripItemDeploy.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripItemPushAll.Name" xml:space="preserve">
+    <value>toolStripItemPushAll</value>
+  </data>
+  <data name="&gt;&gt;toolStripItemPushAll.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripItemPullAll.Name" xml:space="preserve">
+    <value>toolStripItemPullAll</value>
+  </data>
+  <data name="&gt;&gt;toolStripItemPullAll.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripItemOptions.Name" xml:space="preserve">
@@ -564,6 +636,18 @@
   <data name="&gt;&gt;toolStripButtonRemove.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;toolStripLabel1.Name" xml:space="preserve">
+    <value>toolStripLabel1</value>
+  </data>
+  <data name="&gt;&gt;toolStripLabel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripComboFiles.Name" xml:space="preserve">
+    <value>toolStripComboFiles</value>
+  </data>
+  <data name="&gt;&gt;toolStripComboFiles.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;openFileDialog.Name" xml:space="preserve">
     <value>openFileDialog</value>
   </data>
@@ -575,6 +659,12 @@
   </data>
   <data name="&gt;&gt;saveFileDialog.Type" xml:space="preserve">
     <value>System.Windows.Forms.SaveFileDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;folderBrowserDialog.Name" xml:space="preserve">
+    <value>folderBrowserDialog</value>
+  </data>
+  <data name="&gt;&gt;folderBrowserDialog.Type" xml:space="preserve">
+    <value>System.Windows.Forms.FolderBrowserDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>SpudConf</value>

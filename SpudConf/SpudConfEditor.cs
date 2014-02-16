@@ -14,6 +14,7 @@ namespace Tator.SpudConf
     {
         private DataEditor currentEditor;
         public string CurrentType { get; set; }
+        public bool Dirty { get; set; }
 
         private Config currentConfig;
 
@@ -28,8 +29,16 @@ namespace Tator.SpudConf
 
         public void LoadConfig(Stream stream)
         {
-            currentConfig.Load(stream);
+            try
+            {
+                currentConfig.Load(stream);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(this, "Error opening config file: " + e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             PopulateTreeView();
+            Dirty = false;
         }
 
         public void GenerateConfig(Stream stream)
@@ -77,16 +86,46 @@ namespace Tator.SpudConf
             {
                 currentConfig[de.Key].Value = de.Value;
             }
+            Dirty = true;
         }
 
         private void treeViewGUI_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            string key = e.Node.FullPath;
+            SelectNode(e.Node.FullPath);
+        }
+
+        private void SelectNode(string key)
+        {
             if (currentConfig.ContainsKey(key))
             {
-                currentEditor.Key = e.Node.FullPath;
-                currentEditor.Value = currentConfig[e.Node.FullPath].Value;
+                currentEditor.Key = key;
+                currentEditor.Value = currentConfig[key].Value;
             }
+        }
+
+        private void treeViewGUI_AfterLabelEdit(object sender, NodeLabelEditEventArgs e)
+        {
+            // Fixes weird NullPointerException
+            if (e.Node == null)
+                return;
+            if (e.Label.Contains('.'))
+            {
+                e.CancelEdit = true;
+                return;
+            }
+            string oldKey = e.Node.FullPath;
+            string[] nKey = oldKey.Split('.');
+            nKey[e.Node.Level] = e.Label;
+            string newKey = String.Join(".", nKey);
+            if (currentConfig.ContainsParentKey(newKey))
+            {
+                e.CancelEdit = true;
+                return;
+            }
+            e.CancelEdit = false;
+            currentConfig.RenameKey(oldKey, newKey);
+            SelectNode(newKey);
+            Dirty = true;
         }
     }
 

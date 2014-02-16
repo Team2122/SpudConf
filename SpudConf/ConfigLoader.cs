@@ -14,7 +14,7 @@ namespace Tator.SpudConf
         { 
             { "comment", new Regex(@"^\s*#(?<comment>.*?)$") },
             { "metadata", new Regex(@"^\s*#!\s*(?<key>.+?)\s*=\s+""(?<value>.+?)""\s*$") },
-            { "value", new Regex(@"^\s*(?<key>.+?)\s*=\s*""(?<value>.+?)""\s*$") },
+            { "value", new Regex(@"^\s*(?<key>.+?)\s*=\s*""(?<value>.+?)""\s*#?.*?$") },
             { "whitespace", new Regex(@"^\s*$") }
         };
 
@@ -63,9 +63,17 @@ namespace Tator.SpudConf
                             continue;
                         }
                         else
-                        {
+                        {                            
                             throw new InvalidDataException("Invalid config format");
                         }
+                    }
+                    foreach (var m in currentMetadata)
+                    {
+                        config.Metadata.Add(m.Key, m.Value);
+                    }
+                    foreach (var c in currentComments)
+                    {
+                        config.Comments.Add(c);
                     }
                 }
             }

@@ -58,6 +58,7 @@
             this.treeViewGUI.LabelEdit = true;
             this.treeViewGUI.Name = "treeViewGUI";
             this.treeViewGUI.PathSeparator = ".";
+            this.treeViewGUI.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeViewGUI_AfterLabelEdit);
             this.treeViewGUI.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewGUI_AfterSelect);
             // 
             // groupBoxEditorContainer

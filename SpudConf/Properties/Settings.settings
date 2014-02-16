@@ -11,5 +11,11 @@
     <Setting Name="IPAddress" Type="System.String" Scope="User">
       <Value Profile="(Default)">10.21.22.2</Value>
     </Setting>
+    <Setting Name="LocalDirectory" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="RemoteDirectory" Type="System.String" Scope="User">
+      <Value Profile="(Default)">/Config</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
