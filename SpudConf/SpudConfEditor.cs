@@ -156,6 +156,16 @@ namespace Tator.SpudConf
             if (treeViewGUI.SelectedNode != null)
                 treeViewGUI.SelectedNode.BeginEdit();
         }
+
+        private void toolStripItemAdd_Click(object sender, EventArgs e)
+        {
+            Add();
+        }
+
+        private void toolStripItemRemove_Click(object sender, EventArgs e)
+        {
+            Remove();
+        }
     }
 
     public class DataEditor : UserControl

@@ -32,9 +32,11 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SpudConfEditor));
             this.splitContainerGUI = new System.Windows.Forms.SplitContainer();
             this.treeViewGUI = new System.Windows.Forms.TreeView();
-            this.groupBoxEditorContainer = new System.Windows.Forms.GroupBox();
             this.contextMenuStripTreeNode = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripItemRename = new System.Windows.Forms.ToolStripMenuItem();
+            this.groupBoxEditorContainer = new System.Windows.Forms.GroupBox();
+            this.toolStripItemAdd = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripItemRemove = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerGUI)).BeginInit();
             this.splitContainerGUI.Panel1.SuspendLayout();
             this.splitContainerGUI.Panel2.SuspendLayout();
@@ -66,15 +68,11 @@
             this.treeViewGUI.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeViewGUI_AfterLabelEdit);
             this.treeViewGUI.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewGUI_AfterSelect);
             // 
-            // groupBoxEditorContainer
-            // 
-            resources.ApplyResources(this.groupBoxEditorContainer, "groupBoxEditorContainer");
-            this.groupBoxEditorContainer.Name = "groupBoxEditorContainer";
-            this.groupBoxEditorContainer.TabStop = false;
-            // 
             // contextMenuStripTreeNode
             // 
             this.contextMenuStripTreeNode.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripItemAdd,
+            this.toolStripItemRemove,
             this.toolStripItemRename});
             this.contextMenuStripTreeNode.Name = "contextMenuStripTreeNode";
             resources.ApplyResources(this.contextMenuStripTreeNode, "contextMenuStripTreeNode");
@@ -84,6 +82,24 @@
             this.toolStripItemRename.Name = "toolStripItemRename";
             resources.ApplyResources(this.toolStripItemRename, "toolStripItemRename");
             this.toolStripItemRename.Click += new System.EventHandler(this.toolStripItemRename_Click);
+            // 
+            // groupBoxEditorContainer
+            // 
+            resources.ApplyResources(this.groupBoxEditorContainer, "groupBoxEditorContainer");
+            this.groupBoxEditorContainer.Name = "groupBoxEditorContainer";
+            this.groupBoxEditorContainer.TabStop = false;
+            // 
+            // toolStripItemAdd
+            // 
+            this.toolStripItemAdd.Name = "toolStripItemAdd";
+            resources.ApplyResources(this.toolStripItemAdd, "toolStripItemAdd");
+            this.toolStripItemAdd.Click += new System.EventHandler(this.toolStripItemAdd_Click);
+            // 
+            // toolStripItemRemove
+            // 
+            this.toolStripItemRemove.Name = "toolStripItemRemove";
+            resources.ApplyResources(this.toolStripItemRemove, "toolStripItemRemove");
+            this.toolStripItemRemove.Click += new System.EventHandler(this.toolStripItemRemove_Click);
             // 
             // SpudConfEditor
             // 
@@ -107,6 +123,8 @@
         private System.Windows.Forms.GroupBox groupBoxEditorContainer;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripTreeNode;
         private System.Windows.Forms.ToolStripMenuItem toolStripItemRename;
+        private System.Windows.Forms.ToolStripMenuItem toolStripItemAdd;
+        private System.Windows.Forms.ToolStripMenuItem toolStripItemRemove;
 
     }
 }

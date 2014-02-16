@@ -128,6 +128,18 @@
   <metadata name="contextMenuStripTreeNode.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <data name="toolStripItemAdd.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="toolStripItemAdd.Text" xml:space="preserve">
+    <value>&amp;Add</value>
+  </data>
+  <data name="toolStripItemRemove.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="toolStripItemRemove.Text" xml:space="preserve">
+    <value>&amp;Remove</value>
+  </data>
   <data name="toolStripItemRename.Size" type="System.Drawing.Size, System.Drawing">
     <value>152, 22</value>
   </data>
@@ -135,7 +147,7 @@
     <value>&amp;Rename</value>
   </data>
   <data name="contextMenuStripTreeNode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>153, 48</value>
+    <value>153, 92</value>
   </data>
   <data name="&gt;&gt;contextMenuStripTreeNode.Name" xml:space="preserve">
     <value>contextMenuStripTreeNode</value>
@@ -253,6 +265,18 @@
     <value>toolStripItemRename</value>
   </data>
   <data name="&gt;&gt;toolStripItemRename.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripItemAdd.Name" xml:space="preserve">
+    <value>toolStripItemAdd</value>
+  </data>
+  <data name="&gt;&gt;toolStripItemAdd.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripItemRemove.Name" xml:space="preserve">
+    <value>toolStripItemRemove</value>
+  </data>
+  <data name="&gt;&gt;toolStripItemRemove.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
