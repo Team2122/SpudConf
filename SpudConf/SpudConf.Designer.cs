@@ -32,7 +32,6 @@
             this.toolStripContainer = new System.Windows.Forms.ToolStripContainer();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.labelRobotConnected = new System.Windows.Forms.ToolStripStatusLabel();
-            this.spudConfEditor = new Tator.SpudConf.SpudConfEditor();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.toolStripItemFile = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripItemOpenDirectory = new System.Windows.Forms.ToolStripMenuItem();
@@ -61,6 +60,7 @@
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
+            this.spudConfEditor = new Tator.SpudConf.SpudConfEditor();
             this.toolStripContainer.BottomToolStripPanel.SuspendLayout();
             this.toolStripContainer.ContentPanel.SuspendLayout();
             this.toolStripContainer.TopToolStripPanel.SuspendLayout();
@@ -100,13 +100,6 @@
             // 
             this.labelRobotConnected.Name = "labelRobotConnected";
             resources.ApplyResources(this.labelRobotConnected, "labelRobotConnected");
-            // 
-            // spudConfEditor
-            // 
-            this.spudConfEditor.CurrentType = null;
-            this.spudConfEditor.Dirty = false;
-            resources.ApplyResources(this.spudConfEditor, "spudConfEditor");
-            this.spudConfEditor.Name = "spudConfEditor";
             // 
             // menuStrip
             // 
@@ -262,6 +255,7 @@
             this.toolStripButtonAdd.Image = global::Tator.SpudConf.Properties.Resources.Action_Add;
             resources.ApplyResources(this.toolStripButtonAdd, "toolStripButtonAdd");
             this.toolStripButtonAdd.Name = "toolStripButtonAdd";
+            this.toolStripButtonAdd.Click += new System.EventHandler(this.toolStripButtonAdd_Click);
             // 
             // toolStripButtonRemove
             // 
@@ -269,6 +263,7 @@
             this.toolStripButtonRemove.Image = global::Tator.SpudConf.Properties.Resources.Action_Cancel;
             resources.ApplyResources(this.toolStripButtonRemove, "toolStripButtonRemove");
             this.toolStripButtonRemove.Name = "toolStripButtonRemove";
+            this.toolStripButtonRemove.Click += new System.EventHandler(this.toolStripButtonRemove_Click);
             // 
             // toolStripLabel1
             // 
@@ -281,6 +276,13 @@
             this.toolStripComboFiles.Name = "toolStripComboFiles";
             resources.ApplyResources(this.toolStripComboFiles, "toolStripComboFiles");
             this.toolStripComboFiles.SelectedIndexChanged += new System.EventHandler(this.toolStripComboFiles_SelectedIndexChanged);
+            // 
+            // spudConfEditor
+            // 
+            this.spudConfEditor.CurrentType = null;
+            this.spudConfEditor.Dirty = false;
+            resources.ApplyResources(this.spudConfEditor, "spudConfEditor");
+            this.spudConfEditor.Name = "spudConfEditor";
             // 
             // SpudConf
             // 

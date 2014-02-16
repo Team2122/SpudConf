@@ -43,29 +43,22 @@ namespace Tator.SpudConf
         public bool ContainsParentKey(string key)
         {
             var splitKey = key.Split('.');
-            foreach (var c in this)
+            foreach (var n in this)
             {
-                var currentSplitKey = c.Key.Split('.');
-                if (currentSplitKey.Length < splitKey.Length)
+                var splitNode = n.Key.Split('.');
+                if (splitNode.Length < splitKey.Length)
                     continue;
-                var contains = false;
-                for (var i = 0; i < splitKey.Length; i++)
-                {
-                    if (splitKey[i] != currentSplitKey[i])
-                    {
-                        contains = false;
-                        break;
-                    }
-                }
-                if (contains)
-                {
+                var isChild = from k in splitKey
+                              from j in splitNode
+                              where k.Equals(j)
+                              select k;
+                if (isChild.Count() >= splitKey.Length)
                     return true;
-                }
             }
             return false;
         }
 
-        public void RenameKey(string oldKey, string newKey)
+        public void RenameParent(string oldKey, string newKey)
         {
             var toChange = from c in this.ToList()
                            where c.Key.Length >= oldKey.Length
@@ -73,11 +66,28 @@ namespace Tator.SpudConf
                            select c;
             foreach (var change in toChange)
             {
-                var transformedKey = newKey.Replace(oldKey, newKey);
+                var transformedKey = newKey + String.Join("", change.Key.Skip(oldKey.Length));
                 this.Add(transformedKey, this[change.Key]);
                 this.Remove(change.Key);
             }
 
+        }
+
+        public void RemoveParent(string key)
+        {
+            var splitKey = key.Split('.');
+            foreach (var n in this.ToList())
+            {
+                var splitNode = n.Key.Split('.');
+                if (splitNode.Length < splitKey.Length)
+                    continue;
+                var isChild = from k in splitKey
+                              from j in splitNode
+                              where k.Equals(j)
+                              select k;
+                if (isChild.Count() >= splitKey.Length)
+                    this.Remove(n.Key);
+            }
         }
 
         public Dictionary<string, string> Metadata { get; set; }

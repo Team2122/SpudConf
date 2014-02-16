@@ -277,5 +277,15 @@ namespace Tator.SpudConf
         {
 
         }
+
+        private void toolStripButtonAdd_Click(object sender, EventArgs e)
+        {
+            spudConfEditor.Add();
+        }
+
+        private void toolStripButtonRemove_Click(object sender, EventArgs e)
+        {
+            spudConfEditor.Remove();
+        }
     }
 }

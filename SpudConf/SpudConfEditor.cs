@@ -106,7 +106,7 @@ namespace Tator.SpudConf
         private void treeViewGUI_AfterLabelEdit(object sender, NodeLabelEditEventArgs e)
         {
             // Fixes weird NullPointerException
-            if (e.Node == null)
+            if (e.Node == null || e.Label == null)
                 return;
             if (e.Label.Contains('.'))
             {
@@ -123,9 +123,38 @@ namespace Tator.SpudConf
                 return;
             }
             e.CancelEdit = false;
-            currentConfig.RenameKey(oldKey, newKey);
+            currentConfig.RenameParent(oldKey, newKey);
             SelectNode(newKey);
             Dirty = true;
+        }
+
+        public void Add()
+        {
+            uint extendedNum = 0;
+            var prefix = treeViewGUI.SelectedNode == null ? "" : treeViewGUI.SelectedNode.FullPath;
+            prefix = prefix.Length > 0 ? prefix + "." : prefix;
+            string key = prefix + "New Key";
+            while (currentConfig.ContainsKey(key))
+            {
+                key = prefix + String.Format("New Key ({0})", ++extendedNum);
+            }
+            currentConfig.Add(key, new ConfigNode());
+            PopulateTreeView();
+        }
+
+        public void Remove()
+        {
+            if (treeViewGUI.SelectedNode == null)
+                return;
+            var key = treeViewGUI.SelectedNode.FullPath;
+            currentConfig.RemoveParent(key);
+            PopulateTreeView();
+        }        
+
+        private void toolStripItemRename_Click(object sender, EventArgs e)
+        {
+            if (treeViewGUI.SelectedNode != null)
+                treeViewGUI.SelectedNode.BeginEdit();
         }
     }
 
