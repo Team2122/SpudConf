@@ -1,26 +1,97 @@
 ﻿using System;
-using System.Windows.Forms;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
-using System.Speech.Synthesis;
+using System.Linq;
 using System.Net;
 using System.Net.FtpClient;
-using System.Diagnostics;
-using System.Linq;
+using System.Windows.Forms;
 
 namespace Tator.SpudConf
 {
     public partial class SpudConf : Form
     {
-        string currentDirectory;
-        string localFileName;
-        string remoteFileName;
-
-        FtpClient ftpClient;
+        private string currentDirectory;
+        private FtpClient ftpClient;
+        private string localFileName;
+        private string remoteFileName;
 
         public SpudConf()
         {
             InitializeComponent();
+        }
+
+        private string[] listAllFiles(string path)
+        {
+            var files = new List<string>();
+            var directoryInfo = new DirectoryInfo(path);
+
+            foreach (var item in directoryInfo.EnumerateFiles())
+            {
+                files.Add(path + Path.DirectorySeparatorChar + item.Name);
+            }
+
+            foreach (var item in directoryInfo.EnumerateDirectories())
+            {
+                files.AddRange(listAllFiles(path + Path.DirectorySeparatorChar + item.Name));
+            }
+            return files.ToArray();
+        }
+
+        private string[] listRemoteFiles(string dir)
+        {
+            var toDownload = new List<string>();
+            var fileList = ftpClient.GetListing(dir);
+            foreach (var file in fileList)
+            {
+                switch (file.Type)
+                {
+                    case FtpFileSystemObjectType.File:
+                        toDownload.Add(dir + "/" + file.Name);
+                        break;
+
+                    case FtpFileSystemObjectType.Directory:
+                        toDownload.AddRange(listRemoteFiles(dir + "/" + file.Name));
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+            return toDownload.ToArray();
+        }
+
+        private void menuStripQuit(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private bool PromptSave()
+        {
+            var ret = MessageBox.Show(this, "Do you want to save before overrinding changes?",
+                "Overwrite Changes?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (ret == DialogResult.Yes)
+            {
+                toolStripItemSave_Click(this, new EventArgs());
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private void scanDirectory()
+        {
+            toolStripComboFiles.Items.Clear();
+            var baseDir = new Uri(currentDirectory);
+            foreach (var file in listAllFiles(currentDirectory))
+            {
+                var path = baseDir.MakeRelativeUri(new Uri(file)).ToString();
+                path = String.Join("/", path.Split('/').SkipWhile((s, i) => i < 1).ToArray());
+                toolStripComboFiles.Items.Add(path);
+            }
         }
 
         private void SpudConf_Load(object sender, EventArgs e)
@@ -30,39 +101,49 @@ namespace Tator.SpudConf
                 Credentials = new NetworkCredential("anonymous", ""),
                 Host = Properties.Settings.Default.IPAddress
             };
-
         }
 
-        private void menuStripQuit(object sender, EventArgs e)
+        private void toolStripButtonAdd_Click(object sender, EventArgs e)
         {
-            this.Close();
+            spudConfEditor.Add();
         }
 
-        private void toolStripItemOpen_Click(object sender, EventArgs e)
+        private void toolStripButtonRemove_Click(object sender, EventArgs e)
         {
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                using (var s = new FileStream(openFileDialog.FileName, FileMode.Open, FileAccess.Read))
-                {
-                    spudConfEditor.LoadConfig(s);
-                }
-            }
-            localFileName = openFileDialog.FileName;
+            spudConfEditor.Remove();
         }
 
-
-        private void toolStripItemSave_Click(object sender, EventArgs e)
+        private void toolStripComboFiles_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (localFileName == null)
+            var fileName = toolStripComboFiles.SelectedItem as string;
+            if (fileName != "")
             {
-                toolStripItemSaveAs_Click(sender, e);
-                return;
-            }
-            using (var s = new FileStream(localFileName, FileMode.Truncate, FileAccess.ReadWrite))
-            {
-                spudConfEditor.GenerateConfig(s);
+                spudConfEditor.LoadConfig(new FileStream(currentDirectory
+                    + Path.DirectorySeparatorChar + fileName,
+                    FileMode.Open, FileAccess.Read));
+                remoteFileName = fileName;
+                localFileName = currentDirectory + Path.DirectorySeparatorChar + fileName;
             }
             spudConfEditor.Dirty = false;
+        }
+
+        private void toolStripItemGithub_Click(object sender, EventArgs e)
+        {
+            Process.Start("http://github.com/Team2122");
+        }
+
+        private void toolStripItemIpAddress_Click(object sender, EventArgs e)
+        {
+            var dialog = new IPDialog();
+            dialog.TeamNumber = Properties.Settings.Default.TeamNumber;
+            dialog.IPAddress = Properties.Settings.Default.IPAddress;
+            if (dialog.ShowDialog(this) == DialogResult.OK)
+            {
+                Properties.Settings.Default.TeamNumber = dialog.TeamNumber;
+                Properties.Settings.Default.IPAddress = dialog.IPAddress;
+                Properties.Settings.Default.Save();
+                ftpClient.Host = dialog.IPAddress;
+            }
         }
 
         private void toolStripItemName_Click(object sender, EventArgs e)
@@ -85,71 +166,22 @@ namespace Tator.SpudConf
             }
         }
 
-        private void toolStripItemIpAddress_Click(object sender, EventArgs e)
-        {
-            var dialog = new IPDialog();
-            dialog.TeamNumber = Properties.Settings.Default.TeamNumber;
-            dialog.IPAddress = Properties.Settings.Default.IPAddress;
-            if (dialog.ShowDialog(this) == DialogResult.OK)
-            {
-                Properties.Settings.Default.TeamNumber = dialog.TeamNumber;
-                Properties.Settings.Default.IPAddress = dialog.IPAddress;
-                Properties.Settings.Default.Save();
-                ftpClient.Host = dialog.IPAddress;
-            }
-        }
-
-        private void toolStripItemSaveAs_Click(object sender, EventArgs e)
-        {
-            if (saveFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                // TODO: change to save
-                using (var s = new FileStream(saveFileDialog.FileName, FileMode.Truncate, FileAccess.ReadWrite))
-                {
-                    spudConfEditor.GenerateConfig(s);
-                }
-                localFileName = saveFileDialog.FileName;
-            }
-            spudConfEditor.Dirty = true;
-        }
-
-        private void toolStripItemPush_Click(object sender, EventArgs e)
-        {
-            if (localFileName == null || localFileName == "")
-            {
-                MessageBox.Show(this, "Unable to upload: No file open", "Unable to upload",
-                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return;
-            }
-            using (var fileStream = new FileStream(localFileName, FileMode.Open, FileAccess.Read))
-            using (var bufferedStream = new BufferedStream(fileStream))
-            {
-                try
-                {
-                    bufferedStream.CopyTo(ftpClient.OpenWrite(this.localFileName, FtpDataType.ASCII));
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(this, "FTP Error: " + ex.Message, "FTP Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-
-        }
-
-        private void toolStripItemRepo_Click(object sender, EventArgs e)
-        {
-            Process.Start("http://github.com/Team2122/SpudConf");
-        }
-
-        private void toolStripItemGithub_Click(object sender, EventArgs e)
-        {
-            Process.Start("http://github.com/Team2122");
-        }
-
         private void toolStripItemNetworkProfiler_Click(object sender, EventArgs e)
         {
             MessageBox.Show(this, "Ain't got no network profiler yet! Yell at Alex to finish it.",
                 "Nope", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
+
+        private void toolStripItemOpen_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                using (var s = new FileStream(openFileDialog.FileName, FileMode.Open, FileAccess.Read))
+                {
+                    spudConfEditor.LoadConfig(s);
+                }
+            }
+            localFileName = openFileDialog.FileName;
         }
 
         private void toolStripItemOpenDirectory_Click(object sender, EventArgs e)
@@ -162,35 +194,6 @@ namespace Tator.SpudConf
                 Properties.Settings.Default.Save();
                 scanDirectory();
             }
-        }
-
-        private void scanDirectory()
-        {
-            toolStripComboFiles.Items.Clear();
-            var baseDir = new Uri(currentDirectory);
-            foreach (var file in listAllFiles(currentDirectory))
-            {
-                var path = baseDir.MakeRelativeUri(new Uri(file)).ToString();
-                path = String.Join("/", path.Split('/').SkipWhile((s, i) => i < 1).ToArray());
-                toolStripComboFiles.Items.Add(path);
-            }
-        }
-
-        private string[] listAllFiles(string path)
-        {
-            var files = new List<string>();
-            var directoryInfo = new DirectoryInfo(path);
-
-            foreach (var item in directoryInfo.EnumerateFiles())
-            {
-                files.Add(path + Path.DirectorySeparatorChar + item.Name);
-            }
-
-            foreach (var item in directoryInfo.EnumerateDirectories())
-            {
-                files.AddRange(listAllFiles(path + Path.DirectorySeparatorChar + item.Name));
-            }
-            return files.ToArray();
         }
 
         private void toolStripItemOpenTemp_Click(object sender, EventArgs e)
@@ -222,70 +225,63 @@ namespace Tator.SpudConf
             scanDirectory();
         }
 
-        private string[] listRemoteFiles(string dir)
+        private void toolStripItemPush_Click(object sender, EventArgs e)
         {
-            var toDownload = new List<string>();
-            var fileList = ftpClient.GetListing(dir);
-            foreach (var file in fileList)
+            if (localFileName == null || localFileName == "")
             {
-                switch (file.Type)
+                MessageBox.Show(this, "Unable to upload: No file open", "Unable to upload",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            using (var fileStream = new FileStream(localFileName, FileMode.Open, FileAccess.Read))
+            using (var bufferedStream = new BufferedStream(fileStream))
+            {
+                try
                 {
-                    case FtpFileSystemObjectType.File:
-                        toDownload.Add(dir + "/" + file.Name);
-                        break;
-                    case FtpFileSystemObjectType.Directory:
-                        toDownload.AddRange(listRemoteFiles(dir + "/" + file.Name));
-                        break;
-                    default:
-                        break;
+                    bufferedStream.CopyTo(ftpClient.OpenWrite(this.localFileName, FtpDataType.ASCII));
                 }
-            }
-            return toDownload.ToArray();
-        }
-
-        private void toolStripComboFiles_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            var fileName = toolStripComboFiles.SelectedItem as string;
-            if (fileName != "")
-            {
-                spudConfEditor.LoadConfig(new FileStream(currentDirectory
-                    + Path.DirectorySeparatorChar + fileName,
-                    FileMode.Open, FileAccess.Read));
-                remoteFileName = fileName;
-                localFileName = currentDirectory + Path.DirectorySeparatorChar + fileName;
-            }
-            spudConfEditor.Dirty = false;
-        }
-
-        private bool PromptSave()
-        {
-            var ret = MessageBox.Show(this, "Do you want to save before overrinding changes?",
-                "Overwrite Changes?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (ret == DialogResult.Yes)
-            {
-                toolStripItemSave_Click(this, new EventArgs());
-                return true;
-            }
-            else
-            {
-                return false;
+                catch (Exception ex)
+                {
+                    MessageBox.Show(this, "FTP Error: " + ex.Message, "FTP Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
         private void toolStripItemPushAll_Click(object sender, EventArgs e)
         {
-
         }
 
-        private void toolStripButtonAdd_Click(object sender, EventArgs e)
+        private void toolStripItemRepo_Click(object sender, EventArgs e)
         {
-            spudConfEditor.Add();
+            Process.Start("http://github.com/Team2122/SpudConf");
         }
 
-        private void toolStripButtonRemove_Click(object sender, EventArgs e)
+        private void toolStripItemSave_Click(object sender, EventArgs e)
         {
-            spudConfEditor.Remove();
+            if (localFileName == null)
+            {
+                toolStripItemSaveAs_Click(sender, e);
+                return;
+            }
+            using (var s = new FileStream(localFileName, FileMode.Truncate, FileAccess.ReadWrite))
+            {
+                spudConfEditor.GenerateConfig(s);
+            }
+            spudConfEditor.Dirty = false;
+        }
+
+        private void toolStripItemSaveAs_Click(object sender, EventArgs e)
+        {
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                // TODO: change to save
+                using (var s = new FileStream(saveFileDialog.FileName, FileMode.Truncate, FileAccess.ReadWrite))
+                {
+                    spudConfEditor.GenerateConfig(s);
+                }
+                localFileName = saveFileDialog.FileName;
+            }
+            spudConfEditor.Dirty = true;
         }
     }
 }

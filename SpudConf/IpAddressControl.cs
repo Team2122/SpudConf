@@ -1,25 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 using System.Drawing;
 using System.Net;
+using System.Windows.Forms;
 
 namespace Tator.SpudConf
 {
-    class IPAddressControl : TextBox
+    internal class IPAddressControl : TextBox
     {
-        protected override CreateParams CreateParams
-        {
-            get
-            {
-                var p = base.CreateParams;
-                p.ClassName = "SysIpAddress32";
-                return p;
-            }
-        }
-
         public override Font Font
         {
             get
@@ -41,6 +28,16 @@ namespace Tator.SpudConf
             set
             {
                 Text = value.ToString();
+            }
+        }
+
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                var p = base.CreateParams;
+                p.ClassName = "SysIpAddress32";
+                return p;
             }
         }
 

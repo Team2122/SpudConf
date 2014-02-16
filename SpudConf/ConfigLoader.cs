@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
 using System.Reflection;
 using System.Text.RegularExpressions;
@@ -10,74 +8,13 @@ namespace Tator.SpudConf
 {
     public static class ConfigLoader
     {
-        private static Dictionary<string, Regex> regexes = new Dictionary<string, Regex>() 
-        { 
+        private static Dictionary<string, Regex> regexes = new Dictionary<string, Regex>()
+        {
             { "comment", new Regex(@"^\s*#(?<comment>.*?)$") },
             { "metadata", new Regex(@"^\s*#!\s*(?<key>.+?)\s*=\s+""(?<value>.+?)""\s*$") },
             { "value", new Regex(@"^\s*(?<key>.+?)\s*=\s*""(?<value>.+?)""\s*#?.*?$") },
             { "whitespace", new Regex(@"^\s*$") }
         };
-
-        public static void Load(Config config, Stream stream)
-        {
-            if (config == null)
-                throw new ArgumentNullException("config");
-            if (stream == null)
-                throw new ArgumentNullException("stream");
-            Match ma;
-            var currentMetadata = new Dictionary<string, string>();
-            var currentComments = new List<string>();
-            string line;
-            using (var bs = new BufferedStream(stream))
-            {
-                using (var sr = new StreamReader(bs))
-                {
-                    while (!sr.EndOfStream)
-                    {
-                        line = sr.ReadLine();
-                        if ((ma = regexes["metadata"].Match(line)).Success)
-                        {
-                            currentMetadata.Add(ma.Groups["key"].Value.Trim(), ma.Groups["value"].Value);
-                        }
-                        else if ((ma = regexes["comment"].Match(line)).Success)
-                        {
-                            currentComments.Add(ma.Groups["comment"].Value);
-                        }
-                        else if ((ma = regexes["value"].Match(line)).Success)
-                        {
-                            ConfigNode node = new ConfigNode(ma.Groups["value"].Value);
-                            foreach (var m in currentMetadata)
-                            {
-                                node.Metadata.Add(m.Key, m.Value);
-                            }
-                            foreach (var c in currentComments)
-                            {
-                                node.Comments.Add(c);
-                            }
-                            currentMetadata.Clear();
-                            currentComments.Clear();
-                            config.Add(ma.Groups["key"].Value.Trim(), node);
-                        }
-                        else if (regexes["whitespace"].Match(line).Success)
-                        {
-                            continue;
-                        }
-                        else
-                        {                            
-                            throw new InvalidDataException("Invalid config format");
-                        }
-                    }
-                    foreach (var m in currentMetadata)
-                    {
-                        config.Metadata.Add(m.Key, m.Value);
-                    }
-                    foreach (var c in currentComments)
-                    {
-                        config.Comments.Add(c);
-                    }
-                }
-            }
-        }
 
         public static void Generate(Config config, Stream stream)
         {
@@ -136,9 +73,69 @@ namespace Tator.SpudConf
             return cs;
         }
 
+        public static void Load(Config config, Stream stream)
+        {
+            if (config == null)
+                throw new ArgumentNullException("config");
+            if (stream == null)
+                throw new ArgumentNullException("stream");
+            Match ma;
+            var currentMetadata = new Dictionary<string, string>();
+            var currentComments = new List<string>();
+            string line;
+            using (var bs = new BufferedStream(stream))
+            {
+                using (var sr = new StreamReader(bs))
+                {
+                    while (!sr.EndOfStream)
+                    {
+                        line = sr.ReadLine();
+                        if ((ma = regexes["metadata"].Match(line)).Success)
+                        {
+                            currentMetadata.Add(ma.Groups["key"].Value.Trim(), ma.Groups["value"].Value);
+                        }
+                        else if ((ma = regexes["comment"].Match(line)).Success)
+                        {
+                            currentComments.Add(ma.Groups["comment"].Value);
+                        }
+                        else if ((ma = regexes["value"].Match(line)).Success)
+                        {
+                            ConfigNode node = new ConfigNode(ma.Groups["value"].Value);
+                            foreach (var m in currentMetadata)
+                            {
+                                node.Metadata.Add(m.Key, m.Value);
+                            }
+                            foreach (var c in currentComments)
+                            {
+                                node.Comments.Add(c);
+                            }
+                            currentMetadata.Clear();
+                            currentComments.Clear();
+                            config.Add(ma.Groups["key"].Value.Trim(), node);
+                        }
+                        else if (regexes["whitespace"].Match(line).Success)
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            throw new InvalidDataException("Invalid config format");
+                        }
+                    }
+                    foreach (var m in currentMetadata)
+                    {
+                        config.Metadata.Add(m.Key, m.Value);
+                    }
+                    foreach (var c in currentComments)
+                    {
+                        config.Comments.Add(c);
+                    }
+                }
+            }
+        }
+
         public static void Save(Config config, Stream stream)
         {
-
         }
     }
 }

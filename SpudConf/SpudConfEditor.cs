@@ -1,22 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 using System.IO;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace Tator.SpudConf
 {
     public partial class SpudConfEditor : UserControl
     {
-        private DataEditor currentEditor;
-        public string CurrentType { get; set; }
-        public bool Dirty { get; set; }
-
         private Config currentConfig;
+        private DataEditor currentEditor;
 
         public SpudConfEditor()
         {
@@ -24,7 +17,28 @@ namespace Tator.SpudConf
             currentConfig = new Config();
             SetEditor(new StringDataEditor());
             groupBoxEditorContainer.Controls.Add(currentEditor);
+        }
 
+        public string CurrentType { get; set; }
+
+        public bool Dirty { get; set; }
+        public void Add()
+        {
+            uint extendedNum = 0;
+            var prefix = treeViewGUI.SelectedNode == null ? "" : treeViewGUI.SelectedNode.FullPath;
+            prefix = prefix.Length > 0 ? prefix + "." : prefix;
+            string key = prefix + "New Key";
+            while (currentConfig.ContainsKey(key))
+            {
+                key = prefix + String.Format("New Key ({0})", ++extendedNum);
+            }
+            currentConfig.Add(key, new ConfigNode());
+            PopulateTreeView();
+        }
+
+        public void GenerateConfig(Stream stream)
+        {
+            currentConfig.Generate(stream);
         }
 
         public void LoadConfig(Stream stream)
@@ -40,18 +54,13 @@ namespace Tator.SpudConf
             PopulateTreeView();
             Dirty = false;
         }
-
-        public void GenerateConfig(Stream stream)
+        public void Remove()
         {
-            currentConfig.Generate(stream);
-        }
-
-        private void SetEditor(DataEditor editor)
-        {
-            currentEditor = editor;
-            currentEditor.ValueChanged += updateConfigFromEditor;
-            currentEditor.Dock = DockStyle.Fill;
-            groupBoxEditorContainer.Text = currentEditor.GetEditorName();
+            if (treeViewGUI.SelectedNode == null)
+                return;
+            var key = treeViewGUI.SelectedNode.FullPath;
+            currentConfig.RemoveParent(key);
+            PopulateTreeView();
         }
 
         private void PopulateTreeView()
@@ -79,21 +88,6 @@ namespace Tator.SpudConf
             treeViewGUI.EndUpdate();
         }
 
-        private void updateConfigFromEditor(object sender, EventArgs e)
-        {
-            var de = sender as DataEditor;
-            if (currentConfig != null && currentConfig.ContainsKey(de.Key))
-            {
-                currentConfig[de.Key].Value = de.Value;
-            }
-            Dirty = true;
-        }
-
-        private void treeViewGUI_AfterSelect(object sender, TreeViewEventArgs e)
-        {
-            SelectNode(e.Node.FullPath);
-        }
-
         private void SelectNode(string key)
         {
             if (currentConfig.ContainsKey(key))
@@ -101,6 +95,29 @@ namespace Tator.SpudConf
                 currentEditor.Key = key;
                 currentEditor.Value = currentConfig[key].Value;
             }
+        }
+
+        private void SetEditor(DataEditor editor)
+        {
+            currentEditor = editor;
+            currentEditor.ValueChanged += updateConfigFromEditor;
+            currentEditor.Dock = DockStyle.Fill;
+            groupBoxEditorContainer.Text = currentEditor.GetEditorName();
+        }
+        private void toolStripItemAdd_Click(object sender, EventArgs e)
+        {
+            Add();
+        }
+
+        private void toolStripItemRemove_Click(object sender, EventArgs e)
+        {
+            Remove();
+        }
+
+        private void toolStripItemRename_Click(object sender, EventArgs e)
+        {
+            if (treeViewGUI.SelectedNode != null)
+                treeViewGUI.SelectedNode.BeginEdit();
         }
 
         private void treeViewGUI_AfterLabelEdit(object sender, NodeLabelEditEventArgs e)
@@ -128,53 +145,34 @@ namespace Tator.SpudConf
             Dirty = true;
         }
 
-        public void Add()
+        private void treeViewGUI_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            uint extendedNum = 0;
-            var prefix = treeViewGUI.SelectedNode == null ? "" : treeViewGUI.SelectedNode.FullPath;
-            prefix = prefix.Length > 0 ? prefix + "." : prefix;
-            string key = prefix + "New Key";
-            while (currentConfig.ContainsKey(key))
+            SelectNode(e.Node.FullPath);
+        }
+
+        private void updateConfigFromEditor(object sender, EventArgs e)
+        {
+            var de = sender as DataEditor;
+            if (currentConfig != null && currentConfig.ContainsKey(de.Key))
             {
-                key = prefix + String.Format("New Key ({0})", ++extendedNum);
+                currentConfig[de.Key].Value = de.Value;
             }
-            currentConfig.Add(key, new ConfigNode());
-            PopulateTreeView();
-        }
-
-        public void Remove()
-        {
-            if (treeViewGUI.SelectedNode == null)
-                return;
-            var key = treeViewGUI.SelectedNode.FullPath;
-            currentConfig.RemoveParent(key);
-            PopulateTreeView();
-        }        
-
-        private void toolStripItemRename_Click(object sender, EventArgs e)
-        {
-            if (treeViewGUI.SelectedNode != null)
-                treeViewGUI.SelectedNode.BeginEdit();
-        }
-
-        private void toolStripItemAdd_Click(object sender, EventArgs e)
-        {
-            Add();
-        }
-
-        private void toolStripItemRemove_Click(object sender, EventArgs e)
-        {
-            Remove();
+            Dirty = true;
         }
     }
 
     public class DataEditor : UserControl
     {
-        public virtual string Key { get; set; }
-        public virtual string Value { get; set; }
+        public virtual event EventHandler ValueChanged;
+
         public virtual string Description { get; set; }
 
-        public virtual string GetEditorName() { return "Default Editor"; }
-        public virtual event EventHandler ValueChanged;
+        public virtual string Key { get; set; }
+
+        public virtual string Value { get; set; }
+        public virtual string GetEditorName()
+        {
+            return "Default Editor";
+        }
     }
 }

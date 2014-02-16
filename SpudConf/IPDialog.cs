@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
@@ -11,10 +6,10 @@ namespace Tator.SpudConf
 {
     public partial class IPDialog : Form
     {
-        public string TeamNumber
+        public IPDialog()
         {
-            get { return maskedTextBoxTeamNumber.Text; }
-            set { maskedTextBoxTeamNumber.Text = value; }
+            InitializeComponent();
+            maskedTextBoxTeamNumber_TextChanged(this, new EventArgs());
         }
 
         public string IPAddress
@@ -23,10 +18,10 @@ namespace Tator.SpudConf
             set { ipAddressControl1.Text = value; }
         }
 
-        public IPDialog()
+        public string TeamNumber
         {
-            InitializeComponent();
-            maskedTextBoxTeamNumber_TextChanged(this, new EventArgs());
+            get { return maskedTextBoxTeamNumber.Text; }
+            set { maskedTextBoxTeamNumber.Text = value; }
         }
 
         private void maskedTextBoxTeamNumber_TextChanged(object sender, EventArgs e)
