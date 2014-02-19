@@ -79,63 +79,54 @@ namespace Tator.SpudConf
                 throw new ArgumentNullException("config");
             if (stream == null)
                 throw new ArgumentNullException("stream");
-            Match ma;
-            var currentMetadata = new Dictionary<string, string>();
-            var currentComments = new List<string>();
             string line;
+            var metadata = new Dictionary<string, string>();
+            var comments = new List<string>();
             using (var bs = new BufferedStream(stream))
+            using (var sr = new StreamReader(bs))
             {
-                using (var sr = new StreamReader(bs))
+                while (!sr.EndOfStream)
                 {
-                    while (!sr.EndOfStream)
-                    {
-                        line = sr.ReadLine();
-                        if ((ma = regexes["metadata"].Match(line)).Success)
-                        {
-                            currentMetadata.Add(ma.Groups["key"].Value.Trim(), ma.Groups["value"].Value);
-                        }
-                        else if ((ma = regexes["comment"].Match(line)).Success)
-                        {
-                            currentComments.Add(ma.Groups["comment"].Value);
-                        }
-                        else if ((ma = regexes["value"].Match(line)).Success)
-                        {
-                            ConfigNode node = new ConfigNode(ma.Groups["value"].Value);
-                            foreach (var m in currentMetadata)
-                            {
-                                node.Metadata.Add(m.Key, m.Value);
-                            }
-                            foreach (var c in currentComments)
-                            {
-                                node.Comments.Add(c);
-                            }
-                            currentMetadata.Clear();
-                            currentComments.Clear();
-                            config.Add(ma.Groups["key"].Value.Trim(), node);
-                        }
-                        else if (regexes["whitespace"].Match(line).Success)
-                        {
-                            continue;
-                        }
-                        else
-                        {
-                            throw new InvalidDataException("Invalid config format");
-                        }
-                    }
-                    foreach (var m in currentMetadata)
-                    {
-                        config.Metadata.Add(m.Key, m.Value);
-                    }
-                    foreach (var c in currentComments)
-                    {
-                        config.Comments.Add(c);
-                    }
+                    line = sr.ReadLine();
+                    ParseLine(line, config, metadata, comments);
                 }
             }
         }
 
-        public static void Save(Config config, Stream stream)
+        private static void ParseLine(string line, Config config, Dictionary<string, string> currentMetadata, List<string> currentComments)
         {
+            Match ma;
+            if ((ma = regexes["metadata"].Match(line)).Success)
+            {
+                currentMetadata.Add(ma.Groups["key"].Value.Trim(), ma.Groups["value"].Value);
+            }
+            else if ((ma = regexes["comment"].Match(line)).Success)
+            {
+                currentComments.Add(ma.Groups["comment"].Value);
+            }
+            else if ((ma = regexes["value"].Match(line)).Success)
+            {
+                ConfigNode node = new ConfigNode(ma.Groups["value"].Value);
+                foreach (var m in currentMetadata)
+                {
+                    node.Metadata.Add(m.Key, m.Value);
+                }
+                foreach (var c in currentComments)
+                {
+                    node.Comments.Add(c);
+                }
+                currentMetadata.Clear();
+                currentComments.Clear();
+                config.Add(ma.Groups["key"].Value.Trim(), node);
+            }
+            else if (regexes["whitespace"].Match(line).Success)
+            {
+                return;
+            }
+            else
+            {
+                throw new InvalidDataException("Invalid config format");
+            }
         }
     }
 }
