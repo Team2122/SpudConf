@@ -283,5 +283,10 @@ namespace Tator.SpudConf
             }
             spudConfEditor.Dirty = true;
         }
+
+        private void toolStripButtonRename_Click(object sender, EventArgs e)
+        {
+            spudConfEditor.Rename();
+        }
     }
 }

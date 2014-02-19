@@ -32,6 +32,7 @@
             this.toolStripContainer = new System.Windows.Forms.ToolStripContainer();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.labelRobotConnected = new System.Windows.Forms.ToolStripStatusLabel();
+            this.spudConfEditor = new Tator.SpudConf.SpudConfEditor();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.toolStripItemFile = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripItemOpenDirectory = new System.Windows.Forms.ToolStripMenuItem();
@@ -53,14 +54,14 @@
             this.toolStripItemGithub = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripItemNetworkProfiler = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButtonAdd = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonRemove = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripComboFiles = new System.Windows.Forms.ToolStripComboBox();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
-            this.spudConfEditor = new Tator.SpudConf.SpudConfEditor();
+            this.toolStripButtonAdd = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonRemove = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonRename = new System.Windows.Forms.ToolStripButton();
             this.toolStripContainer.BottomToolStripPanel.SuspendLayout();
             this.toolStripContainer.ContentPanel.SuspendLayout();
             this.toolStripContainer.TopToolStripPanel.SuspendLayout();
@@ -100,6 +101,13 @@
             // 
             this.labelRobotConnected.Name = "labelRobotConnected";
             resources.ApplyResources(this.labelRobotConnected, "labelRobotConnected");
+            // 
+            // spudConfEditor
+            // 
+            this.spudConfEditor.CurrentType = null;
+            this.spudConfEditor.Dirty = false;
+            resources.ApplyResources(this.spudConfEditor, "spudConfEditor");
+            this.spudConfEditor.Name = "spudConfEditor";
             // 
             // menuStrip
             // 
@@ -245,9 +253,22 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButtonAdd,
             this.toolStripButtonRemove,
+            this.toolStripButtonRename,
             this.toolStripLabel1,
             this.toolStripComboFiles});
             this.toolStrip1.Name = "toolStrip1";
+            // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            resources.ApplyResources(this.toolStripLabel1, "toolStripLabel1");
+            // 
+            // toolStripComboFiles
+            // 
+            this.toolStripComboFiles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.toolStripComboFiles.Name = "toolStripComboFiles";
+            resources.ApplyResources(this.toolStripComboFiles, "toolStripComboFiles");
+            this.toolStripComboFiles.SelectedIndexChanged += new System.EventHandler(this.toolStripComboFiles_SelectedIndexChanged);
             // 
             // toolStripButtonAdd
             // 
@@ -265,24 +286,13 @@
             this.toolStripButtonRemove.Name = "toolStripButtonRemove";
             this.toolStripButtonRemove.Click += new System.EventHandler(this.toolStripButtonRemove_Click);
             // 
-            // toolStripLabel1
+            // toolStripButtonRename
             // 
-            this.toolStripLabel1.Name = "toolStripLabel1";
-            resources.ApplyResources(this.toolStripLabel1, "toolStripLabel1");
-            // 
-            // toolStripComboFiles
-            // 
-            this.toolStripComboFiles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.toolStripComboFiles.Name = "toolStripComboFiles";
-            resources.ApplyResources(this.toolStripComboFiles, "toolStripComboFiles");
-            this.toolStripComboFiles.SelectedIndexChanged += new System.EventHandler(this.toolStripComboFiles_SelectedIndexChanged);
-            // 
-            // spudConfEditor
-            // 
-            this.spudConfEditor.CurrentType = null;
-            this.spudConfEditor.Dirty = false;
-            resources.ApplyResources(this.spudConfEditor, "spudConfEditor");
-            this.spudConfEditor.Name = "spudConfEditor";
+            this.toolStripButtonRename.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonRename.Image = global::Tator.SpudConf.Properties.Resources.Action_Rename;
+            resources.ApplyResources(this.toolStripButtonRename, "toolStripButtonRename");
+            this.toolStripButtonRename.Name = "toolStripButtonRename";
+            this.toolStripButtonRename.Click += new System.EventHandler(this.toolStripButtonRename_Click);
             // 
             // SpudConf
             // 
@@ -342,6 +352,7 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripItemPullAll;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog;
         private System.Windows.Forms.ToolStripMenuItem toolStripItemOpenTemp;
+        private System.Windows.Forms.ToolStripButton toolStripButtonRename;
     }
 }
 

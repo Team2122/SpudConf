@@ -116,6 +116,11 @@ namespace Tator.SpudConf
 
         private void toolStripItemRename_Click(object sender, EventArgs e)
         {
+            Rename();
+        }
+
+        public void Rename()
+        {
             if (treeViewGUI.SelectedNode != null)
                 treeViewGUI.SelectedNode.BeginEdit();
         }
