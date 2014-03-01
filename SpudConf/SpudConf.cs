@@ -238,7 +238,7 @@ namespace Tator.SpudConf
             {
                 try
                 {
-                    bufferedStream.CopyTo(ftpClient.OpenWrite(this.localFileName, FtpDataType.ASCII));
+                    bufferedStream.CopyTo(ftpClient.OpenWrite(this.remoteFileName, FtpDataType.ASCII));
                 }
                 catch (Exception ex)
                 {
