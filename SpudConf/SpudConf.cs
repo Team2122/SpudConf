@@ -238,7 +238,10 @@ namespace Tator.SpudConf
             {
                 try
                 {
-                    bufferedStream.CopyTo(ftpClient.OpenWrite(this.remoteFileName, FtpDataType.ASCII));
+                    using (var ftpStream = ftpClient.OpenWrite(this.remoteFileName, FtpDataType.ASCII))
+                    {
+                        bufferedStream.CopyTo(ftpStream);
+                    }
                 }
                 catch (Exception ex)
                 {
