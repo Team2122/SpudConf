@@ -14,7 +14,7 @@ namespace Tator.SpudConf
         public override string Key { get { return keyTextBox.Text; } set { keyTextBox.Text = value; } }
         public override string Value { get { return valueTextBox.Text; } set { valueTextBox.Text = value; } }
 
-        public override string GetEditorName() { return "String Editor"; }
+        public override string EditorName { get { return "String Editor"; } }
 
         public override event EventHandler ValueChanged;
 

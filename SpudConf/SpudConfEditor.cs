@@ -104,7 +104,7 @@ namespace Tator.SpudConf
             currentEditor = editor;
             currentEditor.ValueChanged += updateConfigFromEditor;
             currentEditor.Dock = DockStyle.Fill;
-            groupBoxEditorContainer.Text = currentEditor.GetEditorName();
+            groupBoxEditorContainer.Text = currentEditor.EditorName;
         }
 
         private void toolStripItemAdd_Click(object sender, EventArgs e)
@@ -184,9 +184,12 @@ namespace Tator.SpudConf
 
         public virtual string Value { get; set; }
 
-        public virtual string GetEditorName()
+        public virtual string EditorName
         {
-            return "Default Editor";
+            get
+            {
+                return "Default Editor";
+            }
         }
     }
 }
