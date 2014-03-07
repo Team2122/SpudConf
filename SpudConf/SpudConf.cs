@@ -68,7 +68,7 @@ namespace Tator.SpudConf
 
         private bool PromptSave()
         {
-            var ret = MessageBox.Show(this, "Do you want to save before overrinding changes?",
+            var ret = MessageBox.Show(this, "Do you want to save before overriding changes?",
                 "Overwrite Changes?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (ret == DialogResult.Yes)
@@ -227,6 +227,8 @@ namespace Tator.SpudConf
 
         private void toolStripItemPush_Click(object sender, EventArgs e)
         {
+            if (!PromptSave())
+                return;
             if (localFileName == null || localFileName == "")
             {
                 MessageBox.Show(this, "Unable to upload: No file open", "Unable to upload",
