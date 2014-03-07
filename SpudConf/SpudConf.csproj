@@ -38,7 +38,6 @@
     <Reference Include="System.Net.FtpClient">
       <HintPath>..\..\..\..\System.Net.FtpClient.14.01.07\bin\Release\System.Net.FtpClient.dll</HintPath>
     </Reference>
-    <Reference Include="System.Speech" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />

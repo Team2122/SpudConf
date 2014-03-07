@@ -135,7 +135,7 @@
     <value>0, 0</value>
   </data>
   <data name="statusStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>832, 22</value>
+    <value>624, 22</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="statusStrip.TabIndex" type="System.Int32, mscorlib">
@@ -175,10 +175,10 @@
     <value>0, 0</value>
   </data>
   <data name="spudConfEditor.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>5, 5, 5, 5</value>
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="spudConfEditor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>832, 473</value>
+    <value>624, 371</value>
   </data>
   <data name="spudConfEditor.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -195,11 +195,8 @@
   <data name="&gt;&gt;spudConfEditor.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="toolStripContainer.ContentPanel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
   <data name="toolStripContainer.ContentPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>832, 473</value>
+    <value>624, 371</value>
   </data>
   <data name="&gt;&gt;toolStripContainer.ContentPanel.Name" xml:space="preserve">
     <value>toolStripContainer.ContentPanel</value>
@@ -231,9 +228,6 @@
   <data name="toolStripContainer.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="toolStripContainer.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
   <data name="&gt;&gt;toolStripContainer.RightToolStripPanel.Name" xml:space="preserve">
     <value>toolStripContainer.RightToolStripPanel</value>
   </data>
@@ -247,7 +241,7 @@
     <value>2</value>
   </data>
   <data name="toolStripContainer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>832, 544</value>
+    <value>624, 442</value>
   </data>
   <data name="toolStripContainer.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -388,7 +382,7 @@
     <value>0, 0</value>
   </data>
   <data name="menuStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>832, 24</value>
+    <value>624, 24</value>
   </data>
   <data name="menuStrip.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -405,10 +399,10 @@
   <data name="&gt;&gt;menuStrip.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <metadata name="toolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="toolStripEditor.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>432, 17</value>
   </metadata>
-  <data name="toolStrip1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="toolStripEditor.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>None</value>
   </data>
   <data name="toolStripButtonAdd.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
@@ -438,6 +432,36 @@
   <data name="toolStripButtonRename.Text" xml:space="preserve">
     <value>Rename</value>
   </data>
+  <data name="toolStripEditor.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 24</value>
+  </data>
+  <data name="toolStripEditor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>81, 25</value>
+  </data>
+  <data name="toolStripEditor.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="toolStripEditor.Text" xml:space="preserve">
+    <value>toolStrip1</value>
+  </data>
+  <data name="&gt;&gt;toolStripEditor.Name" xml:space="preserve">
+    <value>toolStripEditor</value>
+  </data>
+  <data name="&gt;&gt;toolStripEditor.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripEditor.Parent" xml:space="preserve">
+    <value>toolStripContainer.TopToolStripPanel</value>
+  </data>
+  <data name="&gt;&gt;toolStripEditor.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <metadata name="toolStripFiles.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>694, 17</value>
+  </metadata>
+  <data name="toolStripFiles.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>None</value>
+  </data>
   <data name="toolStripLabel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>28, 22</value>
   </data>
@@ -447,29 +471,26 @@
   <data name="toolStripComboFiles.Size" type="System.Drawing.Size, System.Drawing">
     <value>200, 25</value>
   </data>
-  <data name="toolStrip1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 24</value>
+  <data name="toolStripFiles.Location" type="System.Drawing.Point, System.Drawing">
+    <value>85, 24</value>
   </data>
-  <data name="toolStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>344, 25</value>
+  <data name="toolStripFiles.Size" type="System.Drawing.Size, System.Drawing">
+    <value>273, 25</value>
   </data>
-  <data name="toolStrip1.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+  <data name="toolStripFiles.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
-  <data name="toolStrip1.Text" xml:space="preserve">
-    <value>toolStrip1</value>
+  <data name="&gt;&gt;toolStripFiles.Name" xml:space="preserve">
+    <value>toolStripFiles</value>
   </data>
-  <data name="&gt;&gt;toolStrip1.Name" xml:space="preserve">
-    <value>toolStrip1</value>
-  </data>
-  <data name="&gt;&gt;toolStrip1.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripFiles.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStrip1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;toolStripFiles.Parent" xml:space="preserve">
     <value>toolStripContainer.TopToolStripPanel</value>
   </data>
-  <data name="&gt;&gt;toolStrip1.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;toolStripFiles.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="&gt;&gt;toolStripContainer.TopToolStripPanel.Name" xml:space="preserve">
     <value>toolStripContainer.TopToolStripPanel</value>
@@ -502,7 +523,7 @@
     <value>226, 17</value>
   </metadata>
   <metadata name="folderBrowserDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>521, 17</value>
+    <value>547, 17</value>
   </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -511,16 +532,13 @@
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>8, 16</value>
+    <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>832, 544</value>
+    <value>624, 442</value>
   </data>
   <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
-  </data>
-  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>SpudConfig</value>
@@ -645,17 +663,23 @@
   <data name="&gt;&gt;toolStripItemNetworkProfiler.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripLabel1.Name" xml:space="preserve">
-    <value>toolStripLabel1</value>
+  <data name="&gt;&gt;toolStripButtonAdd.Name" xml:space="preserve">
+    <value>toolStripButtonAdd</value>
   </data>
-  <data name="&gt;&gt;toolStripLabel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;toolStripButtonAdd.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripComboFiles.Name" xml:space="preserve">
-    <value>toolStripComboFiles</value>
+  <data name="&gt;&gt;toolStripButtonRemove.Name" xml:space="preserve">
+    <value>toolStripButtonRemove</value>
   </data>
-  <data name="&gt;&gt;toolStripComboFiles.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;toolStripButtonRemove.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripButtonRename.Name" xml:space="preserve">
+    <value>toolStripButtonRename</value>
+  </data>
+  <data name="&gt;&gt;toolStripButtonRename.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;openFileDialog.Name" xml:space="preserve">
     <value>openFileDialog</value>
@@ -675,23 +699,17 @@
   <data name="&gt;&gt;folderBrowserDialog.Type" xml:space="preserve">
     <value>System.Windows.Forms.FolderBrowserDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripButtonAdd.Name" xml:space="preserve">
-    <value>toolStripButtonAdd</value>
+  <data name="&gt;&gt;toolStripComboFiles.Name" xml:space="preserve">
+    <value>toolStripComboFiles</value>
   </data>
-  <data name="&gt;&gt;toolStripButtonAdd.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;toolStripComboFiles.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripButtonRemove.Name" xml:space="preserve">
-    <value>toolStripButtonRemove</value>
+  <data name="&gt;&gt;toolStripLabel1.Name" xml:space="preserve">
+    <value>toolStripLabel1</value>
   </data>
-  <data name="&gt;&gt;toolStripButtonRemove.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripButtonRename.Name" xml:space="preserve">
-    <value>toolStripButtonRename</value>
-  </data>
-  <data name="&gt;&gt;toolStripButtonRename.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;toolStripLabel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>SpudConf</value>

@@ -33,10 +33,10 @@
             this.splitContainerGUI = new System.Windows.Forms.SplitContainer();
             this.treeViewGUI = new System.Windows.Forms.TreeView();
             this.contextMenuStripTreeNode = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripItemRename = new System.Windows.Forms.ToolStripMenuItem();
-            this.groupBoxEditorContainer = new System.Windows.Forms.GroupBox();
             this.toolStripItemAdd = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripItemRemove = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripItemRename = new System.Windows.Forms.ToolStripMenuItem();
+            this.groupBoxEditorContainer = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerGUI)).BeginInit();
             this.splitContainerGUI.Panel1.SuspendLayout();
             this.splitContainerGUI.Panel2.SuspendLayout();
@@ -67,6 +67,7 @@
             this.treeViewGUI.PathSeparator = ".";
             this.treeViewGUI.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeViewGUI_AfterLabelEdit);
             this.treeViewGUI.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewGUI_AfterSelect);
+            this.treeViewGUI.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewGUI_NodeMouseClick);
             // 
             // contextMenuStripTreeNode
             // 
@@ -76,18 +77,6 @@
             this.toolStripItemRename});
             this.contextMenuStripTreeNode.Name = "contextMenuStripTreeNode";
             resources.ApplyResources(this.contextMenuStripTreeNode, "contextMenuStripTreeNode");
-            // 
-            // toolStripItemRename
-            // 
-            this.toolStripItemRename.Name = "toolStripItemRename";
-            resources.ApplyResources(this.toolStripItemRename, "toolStripItemRename");
-            this.toolStripItemRename.Click += new System.EventHandler(this.toolStripItemRename_Click);
-            // 
-            // groupBoxEditorContainer
-            // 
-            resources.ApplyResources(this.groupBoxEditorContainer, "groupBoxEditorContainer");
-            this.groupBoxEditorContainer.Name = "groupBoxEditorContainer";
-            this.groupBoxEditorContainer.TabStop = false;
             // 
             // toolStripItemAdd
             // 
@@ -100,6 +89,18 @@
             this.toolStripItemRemove.Name = "toolStripItemRemove";
             resources.ApplyResources(this.toolStripItemRemove, "toolStripItemRemove");
             this.toolStripItemRemove.Click += new System.EventHandler(this.toolStripItemRemove_Click);
+            // 
+            // toolStripItemRename
+            // 
+            this.toolStripItemRename.Name = "toolStripItemRename";
+            resources.ApplyResources(this.toolStripItemRename, "toolStripItemRename");
+            this.toolStripItemRename.Click += new System.EventHandler(this.toolStripItemRename_Click);
+            // 
+            // groupBoxEditorContainer
+            // 
+            resources.ApplyResources(this.groupBoxEditorContainer, "groupBoxEditorContainer");
+            this.groupBoxEditorContainer.Name = "groupBoxEditorContainer";
+            this.groupBoxEditorContainer.TabStop = false;
             // 
             // SpudConfEditor
             // 

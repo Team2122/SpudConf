@@ -22,6 +22,7 @@ namespace Tator.SpudConf
         public string CurrentType { get; set; }
 
         public bool Dirty { get; set; }
+
         public void Add()
         {
             uint extendedNum = 0;
@@ -54,6 +55,7 @@ namespace Tator.SpudConf
             PopulateTreeView();
             Dirty = false;
         }
+
         public void Remove()
         {
             if (treeViewGUI.SelectedNode == null)
@@ -104,6 +106,7 @@ namespace Tator.SpudConf
             currentEditor.Dock = DockStyle.Fill;
             groupBoxEditorContainer.Text = currentEditor.GetEditorName();
         }
+
         private void toolStripItemAdd_Click(object sender, EventArgs e)
         {
             Add();
@@ -164,6 +167,11 @@ namespace Tator.SpudConf
             }
             Dirty = true;
         }
+
+        private void treeViewGUI_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            ((TreeView)sender).SelectedNode = e.Node;
+        }
     }
 
     public class DataEditor : UserControl
@@ -175,6 +183,7 @@ namespace Tator.SpudConf
         public virtual string Key { get; set; }
 
         public virtual string Value { get; set; }
+
         public virtual string GetEditorName()
         {
             return "Default Editor";
