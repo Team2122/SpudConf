@@ -68,8 +68,8 @@ namespace Tator.SpudConf
 
         private bool PromptSave()
         {
-            var ret = MessageBox.Show(this, "Do you want to save before overriding changes?",
-                "Overwrite Changes?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            var ret = MessageBox.Show(this, "Do you want to save before performing this action?",
+                "Save Changes?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (ret == DialogResult.Yes)
             {
