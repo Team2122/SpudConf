@@ -34,7 +34,7 @@ namespace Tator.SpudConf
                 key = prefix + String.Format("New Key ({0})", ++extendedNum);
             }
             currentConfig.Add(key, new ConfigNode());
-            PopulateTreeView();
+            PopulateTreeView(false);
         }
 
         public void GenerateConfig(Stream stream)
@@ -65,10 +65,11 @@ namespace Tator.SpudConf
             PopulateTreeView();
         }
 
-        private void PopulateTreeView()
+        private void PopulateTreeView(bool clear = true)
         {
             treeViewGUI.BeginUpdate();
-            treeViewGUI.Nodes.Clear();
+            if (clear)
+                treeViewGUI.Nodes.Clear();
             foreach (var c in currentConfig)
             {
                 var path = new List<string>(c.Key.Split('.'));

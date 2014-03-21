@@ -5,7 +5,9 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.FtpClient;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using System.Security.Cryptography;
 
 namespace Tator.SpudConf
 {
@@ -292,6 +294,32 @@ namespace Tator.SpudConf
         private void toolStripButtonRename_Click(object sender, EventArgs e)
         {
             spudConfEditor.Rename();
+        }
+
+        private void toolStripItemPullLogs_Click(object sender, EventArgs e)
+        {
+            //var result = folderBrowserDialogPullLogs.ShowDialog(this);
+            var directory = "/";
+            var fileList = ftpClient.GetListing(directory);
+            Regex r = new Regex(@"^/Log_\d+\.csv$");
+            foreach (var f in fileList)
+            {
+                var file = f.FullName;
+                if (!r.Match(file).Success)
+                {
+                    continue;
+                }
+                var fileName = String.Format(@"C:\Users\{0}\Documents\Spudnik Logs\{1} {2}", Environment.UserName, DateTime.Now.ToString(@"yyyy_MM_dd hh.mm.ss"), file.Replace("/","").Replace(@"\","") /* Remove slashes */);
+                Directory.CreateDirectory(Path.GetDirectoryName(fileName));
+                using (var fileStream = new FileStream(fileName, FileMode.Create, FileAccess.Write))
+                using (var bufferedStream = new BufferedStream(fileStream))
+                {
+                    var ftpStream = ftpClient.OpenRead(file, FtpDataType.ASCII);
+                    ftpStream.CopyTo(bufferedStream);
+                    ftpStream.Close();
+                    ftpClient.DeleteFile(file);
+                }
+            }
         }
     }
 }
