@@ -44,6 +44,7 @@ namespace Tator.SpudConf
 
         public void LoadConfig(Stream stream)
         {
+            currentConfig.Clear();
             try
             {
                 currentConfig.Load(stream);
