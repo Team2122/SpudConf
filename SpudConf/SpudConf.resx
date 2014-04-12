@@ -125,11 +125,11 @@
     <value>None</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="labelRobotConnected.Size" type="System.Drawing.Size, System.Drawing">
-    <value>114, 17</value>
+  <data name="labelLocalDirectory.Size" type="System.Drawing.Size, System.Drawing">
+    <value>135, 17</value>
   </data>
-  <data name="labelRobotConnected.Text" xml:space="preserve">
-    <value>Robot Disconnected</value>
+  <data name="labelLocalDirectory.Text" xml:space="preserve">
+    <value>Local Directory: &lt;none&gt;</value>
   </data>
   <data name="statusStrip.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
@@ -558,10 +558,10 @@
   <data name="$this.Text" xml:space="preserve">
     <value>SpudConfig</value>
   </data>
-  <data name="&gt;&gt;labelRobotConnected.Name" xml:space="preserve">
-    <value>labelRobotConnected</value>
+  <data name="&gt;&gt;labelLocalDirectory.Name" xml:space="preserve">
+    <value>labelLocalDirectory</value>
   </data>
-  <data name="&gt;&gt;labelRobotConnected.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelLocalDirectory.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripItemFile.Name" xml:space="preserve">

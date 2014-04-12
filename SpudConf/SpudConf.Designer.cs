@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SpudConf));
             this.toolStripContainer = new System.Windows.Forms.ToolStripContainer();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
-            this.labelRobotConnected = new System.Windows.Forms.ToolStripStatusLabel();
+            this.labelLocalDirectory = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.toolStripItemFile = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripItemOpenDirectory = new System.Windows.Forms.ToolStripMenuItem();
@@ -99,13 +99,13 @@
             // 
             resources.ApplyResources(this.statusStrip, "statusStrip");
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.labelRobotConnected});
+            this.labelLocalDirectory});
             this.statusStrip.Name = "statusStrip";
             // 
-            // labelRobotConnected
+            // labelLocalDirectory
             // 
-            this.labelRobotConnected.Name = "labelRobotConnected";
-            resources.ApplyResources(this.labelRobotConnected, "labelRobotConnected");
+            this.labelLocalDirectory.Name = "labelLocalDirectory";
+            resources.ApplyResources(this.labelLocalDirectory, "labelLocalDirectory");
             // 
             // menuStrip
             // 
@@ -359,7 +359,7 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripItemGithub;
         private System.Windows.Forms.ToolStripMenuItem toolStripItemNetworkProfiler;
         private System.Windows.Forms.StatusStrip statusStrip;
-        private System.Windows.Forms.ToolStripStatusLabel labelRobotConnected;
+        private System.Windows.Forms.ToolStripStatusLabel labelLocalDirectory;
         private System.Windows.Forms.ToolStrip toolStripEditor;
         private System.Windows.Forms.ToolStripButton toolStripButtonAdd;
         private System.Windows.Forms.ToolStripButton toolStripButtonRemove;

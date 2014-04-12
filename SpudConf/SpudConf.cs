@@ -203,6 +203,7 @@ namespace Tator.SpudConf
                 currentDirectory = folderBrowserDialog.SelectedPath;
                 Properties.Settings.Default.LocalDirectory = folderBrowserDialog.SelectedPath;
                 Properties.Settings.Default.Save();
+                labelLocalDirectory.Text = "Local Directory: " + currentDirectory;
                 scanDirectory();
             }
         }
