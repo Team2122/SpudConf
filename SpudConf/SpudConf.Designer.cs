@@ -32,7 +32,6 @@
             this.toolStripContainer = new System.Windows.Forms.ToolStripContainer();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.labelRobotConnected = new System.Windows.Forms.ToolStripStatusLabel();
-            this.spudConfEditor = new Tator.SpudConf.SpudConfEditor();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.toolStripItemFile = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripItemOpenDirectory = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,6 +45,7 @@
             this.toolStripItemDeploy = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripItemPushAll = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripItemPullAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripItemPullLogs = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripItemOptions = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripItemName = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripItemIpAddress = new System.Windows.Forms.ToolStripMenuItem();
@@ -63,8 +63,8 @@
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
-            this.toolStripItemPullLogs = new System.Windows.Forms.ToolStripMenuItem();
             this.folderBrowserDialogPullLogs = new System.Windows.Forms.FolderBrowserDialog();
+            this.spudConfEditor = new Tator.SpudConf.SpudConfEditor();
             this.toolStripContainer.BottomToolStripPanel.SuspendLayout();
             this.toolStripContainer.ContentPanel.SuspendLayout();
             this.toolStripContainer.TopToolStripPanel.SuspendLayout();
@@ -106,13 +106,6 @@
             // 
             this.labelRobotConnected.Name = "labelRobotConnected";
             resources.ApplyResources(this.labelRobotConnected, "labelRobotConnected");
-            // 
-            // spudConfEditor
-            // 
-            this.spudConfEditor.CurrentType = null;
-            this.spudConfEditor.Dirty = false;
-            resources.ApplyResources(this.spudConfEditor, "spudConfEditor");
-            this.spudConfEditor.Name = "spudConfEditor";
             // 
             // menuStrip
             // 
@@ -196,15 +189,21 @@
             // 
             // toolStripItemPushAll
             // 
-            this.toolStripItemPushAll.Name = "toolStripItemPushAll";
             resources.ApplyResources(this.toolStripItemPushAll, "toolStripItemPushAll");
+            this.toolStripItemPushAll.Name = "toolStripItemPushAll";
             this.toolStripItemPushAll.Click += new System.EventHandler(this.toolStripItemPushAll_Click);
             // 
             // toolStripItemPullAll
             // 
-            this.toolStripItemPullAll.Name = "toolStripItemPullAll";
             resources.ApplyResources(this.toolStripItemPullAll, "toolStripItemPullAll");
+            this.toolStripItemPullAll.Name = "toolStripItemPullAll";
             this.toolStripItemPullAll.Click += new System.EventHandler(this.toolStripItemPullAll_Click);
+            // 
+            // toolStripItemPullLogs
+            // 
+            this.toolStripItemPullLogs.Name = "toolStripItemPullLogs";
+            resources.ApplyResources(this.toolStripItemPullLogs, "toolStripItemPullLogs");
+            this.toolStripItemPullLogs.Click += new System.EventHandler(this.toolStripItemPullLogs_Click);
             // 
             // toolStripItemOptions
             // 
@@ -306,11 +305,12 @@
             resources.ApplyResources(this.toolStripComboFiles, "toolStripComboFiles");
             this.toolStripComboFiles.SelectedIndexChanged += new System.EventHandler(this.toolStripComboFiles_SelectedIndexChanged);
             // 
-            // toolStripItemPullLogs
+            // spudConfEditor
             // 
-            this.toolStripItemPullLogs.Name = "toolStripItemPullLogs";
-            resources.ApplyResources(this.toolStripItemPullLogs, "toolStripItemPullLogs");
-            this.toolStripItemPullLogs.Click += new System.EventHandler(this.toolStripItemPullLogs_Click);
+            this.spudConfEditor.CurrentType = null;
+            this.spudConfEditor.Dirty = false;
+            resources.ApplyResources(this.spudConfEditor, "spudConfEditor");
+            this.spudConfEditor.Name = "spudConfEditor";
             // 
             // SpudConf
             // 

@@ -7,7 +7,6 @@ using System.Net;
 using System.Net.FtpClient;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using System.Security.Cryptography;
 
 namespace Tator.SpudConf
 {
@@ -70,6 +69,8 @@ namespace Tator.SpudConf
 
         private bool PromptSave()
         {
+            if (!spudConfEditor.Dirty)
+                return false;
             var ret = MessageBox.Show(this, "Do you want to save before performing this action?",
                 "Save Changes?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
@@ -117,13 +118,21 @@ namespace Tator.SpudConf
 
         private void toolStripComboFiles_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var fileName = toolStripComboFiles.SelectedItem as string;
+            var fileName = (string)toolStripComboFiles.SelectedItem;
             if (fileName != "")
             {
                 spudConfEditor.LoadConfig(new FileStream(currentDirectory
                     + Path.DirectorySeparatorChar + fileName,
                     FileMode.Open, FileAccess.Read));
-                remoteFileName = fileName;
+                if (currentDirectory.Contains("Config"))
+                {
+                    var remoteDirectory = currentDirectory.Substring(currentDirectory.IndexOf("Config")).Replace("\\", "/");
+                    remoteFileName = "/" + remoteDirectory + "/" + fileName;
+                }
+                else
+                {
+                    remoteFileName = fileName;
+                }
                 localFileName = currentDirectory + Path.DirectorySeparatorChar + fileName;
             }
             spudConfEditor.Dirty = false;
@@ -309,7 +318,7 @@ namespace Tator.SpudConf
                 {
                     continue;
                 }
-                var fileName = String.Format(@"C:\Users\{0}\Documents\Spudnik Logs\{1} {2}", Environment.UserName, DateTime.Now.ToString(@"yyyy_MM_dd hh.mm.ss"), file.Replace("/","").Replace(@"\","") /* Remove slashes */);
+                var fileName = String.Format(@"C:\Users\{0}\Documents\Spudnik Logs\{1} {2}", Environment.UserName, DateTime.Now.ToString(@"yyyy_MM_dd hh.mm.ss"), file.Replace("/", "").Replace(@"\", "") /* Remove slashes */);
                 Directory.CreateDirectory(Path.GetDirectoryName(fileName));
                 using (var fileStream = new FileStream(fileName, FileMode.Create, FileAccess.Write))
                 using (var bufferedStream = new BufferedStream(fileStream))

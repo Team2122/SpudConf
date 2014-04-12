@@ -318,11 +318,17 @@
   <data name="toolStripItemDeploy.Text" xml:space="preserve">
     <value>&amp;Push</value>
   </data>
+  <data name="toolStripItemPushAll.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="toolStripItemPushAll.Size" type="System.Drawing.Size, System.Drawing">
     <value>152, 22</value>
   </data>
   <data name="toolStripItemPushAll.Text" xml:space="preserve">
     <value>Push &amp;All</value>
+  </data>
+  <data name="toolStripItemPullAll.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="toolStripItemPullAll.Size" type="System.Drawing.Size, System.Drawing">
     <value>152, 22</value>
@@ -546,6 +552,9 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>624, 442</value>
   </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="$this.Text" xml:space="preserve">
     <value>SpudConfig</value>
   </data>
@@ -625,6 +634,12 @@
     <value>toolStripItemPullAll</value>
   </data>
   <data name="&gt;&gt;toolStripItemPullAll.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripItemPullLogs.Name" xml:space="preserve">
+    <value>toolStripItemPullLogs</value>
+  </data>
+  <data name="&gt;&gt;toolStripItemPullLogs.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripItemOptions.Name" xml:space="preserve">
@@ -716,12 +731,6 @@
   </data>
   <data name="&gt;&gt;folderBrowserDialog.Type" xml:space="preserve">
     <value>System.Windows.Forms.FolderBrowserDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripItemPullLogs.Name" xml:space="preserve">
-    <value>toolStripItemPullLogs</value>
-  </data>
-  <data name="&gt;&gt;toolStripItemPullLogs.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;folderBrowserDialogPullLogs.Name" xml:space="preserve">
     <value>folderBrowserDialogPullLogs</value>
